@@ -121,26 +121,23 @@ int bfs(pos start, pos path[])
 {
 	pos Q[32768];
 	pos V[32768];
-	int n = 0;
-	int nv = 0;
+	int n = 0, np = 0;
 	Q[n++] = start;
-	V[nv++] = start;
-	int np = 0;
+	path[np++] = start;
 	
 	while (n > 0)
 	{
 		pos current = pop(Q, n);
 		n--;
-		path[np++] = current;
 		
 		pos neigh[8];
 		int nn = next(current, neigh);
 		for (int i = 0; i < nn; i++)
 		{
-			if (!find(neigh[i], V, nv))
+			if (!find(neigh[i], path, np))
 			{
 				Q[n++] = neigh[i];
-				V[nv++] = neigh[i];
+				path[np++] = neigh[i];
 			}
 		}
 	}
